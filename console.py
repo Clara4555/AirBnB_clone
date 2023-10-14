@@ -32,16 +32,16 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program.
         """
         return True
-    
+
     def do_EOF(self, arg):
         """EOF signal to exit the program.
         """
         return True
-    
+
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
-        return
-    
+        return True
+
     def do_create(self, line):
         """Usage: create <class>
         Create a new class instance and print its id.
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance = eval(f"{args[0]}")()
             print(new_instance.id)
         storage.save()
-    
+
     def do_show(self, line):
         """Usage: show <class> <id>
         prints a string representation of an instance based on class name
@@ -99,7 +99,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in self.__classes:
             print("** class doesn't exist **")
         else:
-            print([str(val) for k, val in storage.all().items() if k.startswith(args[0])])
+            s = storage.all().items()
+            print([str(val) for k, val in s if k.startswith(args[0])])
 
     def do_update(self, line):
         """Usage: update <class> <id> <attribute_name> <attribute_value>
@@ -137,6 +138,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 setattr(obj, att_name, att_value)
             storage.save()
-        
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
