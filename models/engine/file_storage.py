@@ -1,8 +1,13 @@
 #!/usr/bin/python3
 """the FileStorage class."""
 import json
-from models import base_model
-
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class FileStorage():
     """Representing an abstract storage engine.
@@ -37,6 +42,6 @@ class FileStorage():
                 for object in obj_dict.values():
                     class_name = object["__class__"]
                     del object["__class__"]
-                    self.new(eval(f"base_model.{class_name}")(**object))
+                    self.new(eval(f"{class_name}")(**object))
         except FileNotFoundError:
             return
