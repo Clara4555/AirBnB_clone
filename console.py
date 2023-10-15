@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
-        return True
+        pass
 
     def do_create(self, line):
         """Usage: create <class>
