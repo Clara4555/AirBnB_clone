@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
         prompt (str): The command prompt.
     """
     prompt = "(hbnb) "
-    __classes = {
+    __classes = [
         "BaseModel",
         "User",
         "State",
@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         "Place",
         "Amenity",
         "Review"
-    }
+        ]
 
     def do_quit(self, arg):
         """Quit command to exit the program.
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_instance = eval(f"{args[0]}")()
             print(new_instance.id)
-        storage.save()
+            storage.save()
 
     def do_show(self, line):
         """Usage: show <class> <id>
@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
                     setattr(obj, att_name, att_value)
             else:
                 setattr(obj, att_name, att_value)
-            storage.save()
+                storage.save()
 
 
 if __name__ == '__main__':
