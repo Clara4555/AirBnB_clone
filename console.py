@@ -143,6 +143,39 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, att_name, att_value)
                 storage.save()
 
+    def default(self, line):
+        "Defining any other command"
+        args = line.split('.')
+
+        if args[0] in self.__classes:
+            if args[1] == "all()":
+                self.do_all(args[0])
+            elif args[1] == "count()":
+                count = 0
+                for key in storage.all():
+                    if key.startswith(args[0]):
+                        count += 1
+                print(count)
+            elif args[1].startswith("show"):
+                unique_id = eval(args[1].strip("show()"))
+                self.do_show(f"{args[0]} {unique_id}")
+            elif args[1].startswith("destroy"):
+                unique_id = eval(args[1].strip("destroy()"))
+                self.do_destroy(f"{args[0]} {unique_id}")
+            elif args[1].startswith("update"):
+                if args[1].endswith("})"):
+                    start = args[1].strip("update()").strip("}").split(", {")
+                    unique_id = eval(start[0])
+                    diction = eval('{' + start[1] + '}')
+                    for key, value in diction.items():
+                        self.do_update(f"{args[0]} {unique_id} {key} {value}")
+                else:
+                    start = args[1].strip("update()").split(", ")
+                    unique_id = eval(start[0])
+                    key = eval(start[1])
+                    value = start[2]
+                    self.do_update(f"{args[0]} {unique_id} {key} {value}")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
