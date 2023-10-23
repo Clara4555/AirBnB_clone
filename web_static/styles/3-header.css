@@ -1,0 +1,19 @@
+header{
+    /* 3-header.css */
+    header{
+
+    /* background-color: #FF0000;  */
+    height: 70px;
+     width: 100%;
+     color: #ffffff;
+     border-bottom: 1px solid #cccccc;
+
+}
+.logo{
+    width: 100px;
+	height: 100%;
+    background-position: center;
+	background-repeat: no-repeat;
+	background-image: url("../images/logo.png");
+	margin-left: 20px;
+}
